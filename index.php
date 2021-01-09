@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------------------
  */
 
+
 // rediret to index.php if requested as default document (prevents issue of double loading same page by different URL)
 if (basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) != basename($_SERVER['SCRIPT_NAME'])) {
   header('Location: index.php?' . parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) , 301);
@@ -29,6 +30,8 @@ if ($request['page'] == '')
 
 // Caching
 header('Cache-Control: must-revalidate');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
 require_once 'lib/pagecache.php';
 $cache = new Pagecache(const_path . 'temp/pagecache/' . config_cachefolder . '/' . $config_pages . '/' . $request['page'] . '.html', config_cache);
 

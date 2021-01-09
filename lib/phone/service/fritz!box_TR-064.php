@@ -11,6 +11,18 @@
 
 require_once '../../../lib/includes.php';
 require_once const_path_system . 'phone/phone.php';
+
+function console_log( $data ){
+  echo '<script>';
+  echo 'console.log('. json_encode( $data ) .')';
+  echo '</script>';
+}
+function console_debug( $data ){
+  echo '<script>';
+  echo 'console.debug("PHP:" +' . print_r($data). ')';
+  echo '</script>';
+}
+
 /**
  * This class reads the phonelist of an fritz!box phonesystem via TR-064 protocol
  * This can only work if you enable "Zugriff für Anwendungen zulassen".
@@ -133,7 +145,8 @@ class phone_fritzbox_TR064 extends phone
         $url = $this->call_list_url . '&max=' . $this->max_calls_to_fetch;
         $this->debug($url, "URL for call_list");
         // download xml file and put it to xml parser
-        $GetCallListXml = file_get_contents($url, false, stream_context_create(array('ssl' => $self->context_ssl)));
+        $GetCallListXml = file_get_contents($url, false, null);
+		//$GetCallListXml = file_get_contents($url, false, stream_context_create(array('ssl' => $self->context_ssl)));
         $simplexml      = simplexml_load_string($GetCallListXml);
         $this->debug($GetCallListXml, "GetCallListXml");
         /*
