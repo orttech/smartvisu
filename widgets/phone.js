@@ -15,12 +15,12 @@ $.widget("sv.phone_list", $.sv.widget, {
 			var ret;
 			var line = '';
 			var sum = 1;
-
+//console.debug(data);
 			for (var i in data) {
 				ret = '<img class="icon" src="pics/phone/' + data[i].pic + '" alt="' + data[i].pic + '" />';
 				ret += '<img class="dir" src="lib/phone/pics/' + data[i].dirpic + '" alt="' + data[i].dirpic + '" />';
 				ret += '<h3>' + data[i].text + '&nbsp;</h3>';
-				ret += '<p>' + data[i].number + '&nbsp;</p>';
+				ret += '<p>' + data[i].number + ' -> ' + data[i].called+ '&nbsp;</p>';
 				ret += '<span class="ui-li-count">' + data[i].date + '</span>';
 				ret = '<a ' + (data[i].number ? 'href="callto://' + data[i].number : '') + '">' + ret + '</a>';
 

@@ -10,6 +10,7 @@
 
 {% extends "base.html" %}
 
+
 {% block sidebar %}
 
 	{{ lib.updatecheck() }}
@@ -19,19 +20,45 @@
 	<div class="center">
 		{{ clock.miniclock('', 'l, ' ~ lang('format','date') ) }}
 	</div>
-
+	<hr>
+	{{ phone.list('phonelist', 'Telefonliste', 5) }}	
+	<hr>
+	{{ calendar.list('calendarlist', 'Kalender', 5) }}
 	<hr>
 	{{ weather.current('weather') }}
 	<hr>
 	{{ weather.forecastweek('weather_forecast') }}
-	<hr>
-	{{ calendar.list('calendarlist', 'Kalender', 5) }}
-	<hr>
-	{{ phone.list('phonelist', 'Telefonliste', 5) }}
+
 
 {% endblock %}
 
 {% block content %}
-	{% include 'navigation.html' %}
+
+	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+
+	<style>
+		#technik:after {
+			background-image: url("{{ icon0 }}sani_pump.svg");
+		}
+
+		#strom:after {
+			background-image: url("{{ icon0 }}measure_power_meter.svg");
+		}
+
+		#solar:after,
+		#heizung:after,
+		#wasser:after {
+			background-image: url("{{ icon0 }}time_graph.svg");
+		}
+	</style>
+
+	<h3>AZ</h3>
+	{{ plot.period('p6', ['12','13'], 'raw', '24h','',Nan,'',1000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'] ) }}
+	{{ plot.comfortchart('c1','13','12') }}
+	<h3>WG</h3>
+	{{ plot.period('p7', ['10','11'], 'raw', '24h','',Nan,'',1000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'] ) }}
+	
+	
+
 {% endblock %}
 
