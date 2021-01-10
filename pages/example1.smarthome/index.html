@@ -51,7 +51,8 @@
 			background-image: url("{{ icon0 }}time_graph.svg");
 		}
 	</style>
-
+	<h3>Strom</h3>
+	{{ plot.period('p1', '2', 'raw', '24h','',Nan,'',1000,'Stromverbrauch',Nan, Nan, ['', 'kWh'] ) }}
 	<h3>AZ</h3>
 	{{ plot.period('p6', ['12','13'], 'raw', '24h','',Nan,'',1000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'] ) }}
 	{{ plot.comfortchart('c1','13','12') }}
