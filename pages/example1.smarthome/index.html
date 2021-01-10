@@ -51,12 +51,14 @@
 			background-image: url("{{ icon0 }}time_graph.svg");
 		}
 	</style>
+	<h3>Strom</h3>
+	{{ plot.period('bewegung', '2', 'max', '48h', 'now', 0, '', '500', 'Stromverbrauch', Nan,Nan, ['Uhrzeit', 'kWh'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 
 	<h3>AZ</h3>
-	{{ plot.period('p6', ['12','13'], 'raw', '24h','',Nan,'',1000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'] ) }}
+	{{ plot.period('p6', ['12','13'], 'raw', '48h','',Nan,'',10000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'],'advanced' ) }}
 	{{ plot.comfortchart('c1','13','12') }}
 	<h3>WG</h3>
-	{{ plot.period('p7', ['10','11'], 'raw', '24h','',Nan,'',1000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'] ) }}
+	{{ plot.period('p7', ['10','11'], 'raw', '48h','',Nan,'',10000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'],'advanced' ) }}
 	
 	
 
