@@ -25,9 +25,21 @@
 	<hr>
 	{{ calendar.list('calendarlist', 'Kalender', 5) }}
 	<hr>
+    <iframe class=center marginheight='0' marginwidth='0' scrolling='no' width='300' height='365' name='FC3' style='border:1px solid;border-radius:20px;border-color:#00537f;' 
+	src='https://api.wetteronline.de/wetterwidget?gid=x0492&modeid=FC3&seourl=reichenbach-baden-wuerttemberg-73262&locationname=Reichenbach&lang=de' >
+	</iframe>	
+	<iframe class=center marginheight='0' marginwidth='0' scrolling='no' width='300' height='365' name='FC3' style='border:1px solid;border-radius:20px;border-color:#00537f;' 
+	srcdoc="<img class=center src='https://www.wetteronline.de/?diagram=true&gid=x0492&pid=p_city_local&timestamp=&trendchart=true'/>" src='https://api.wetteronline.de/wetterwidget?gid=x0492&modeid=FC3&seourl=reichenbach-baden-wuerttemberg-73262&locationname=Reichenbach&lang=de' >
+	</iframe>	
+
+	<h1><img class=center src='https://www.wetteronline.de/?diagram=true&gid=x0492&pid=p_city_local&timestamp=&trendchart=true'/></h1>
+	<hr>
 	{{ weather.current('weather') }}
 	<hr>
 	{{ weather.forecastweek('weather_forecast') }}
+	
+	
+	
 
 
 {% endblock %}
@@ -35,6 +47,7 @@
 {% block content %}
 
 	<!--<h1><img class="icon" src='{{ icon0 }}sani_buffer_temp_down.png'/>Technik</h1>-->
+	
 
 	<style>
 		#technik:after {
@@ -51,14 +64,46 @@
 			background-image: url("{{ icon0 }}time_graph.svg");
 		}
 	</style>
+	<ul data-role="listview" data-dividertheme="c"> 
+
+		<li data-role="list-divider">Untergeschoss</li>
+		<li data-icon="false">
+			<a href="index.php?page=KG.Keller">
+				<img class="icon icon0" src="{{ icon0 }}scene_office.svg"/><h3>Arbeitszimmer</h3>
+				<div class="ui-li-aside">
+					{{ basic.print('AZ_temp', '13', '°') }} / {{ basic.print('AZ_hum', '12', '%') }} <br />
+				</div>
+			</a>
+
+		</li>
+		<li data-icon="false">
+			<a href="index.php?page=KG.Keller">
+				<img class="icon icon0" src="{{ icon0 }}scene_pool.svg"/><h3>Schwimmbad</h3>
+				<div class="ui-li-aside">
+					{{ basic.print('Pool_temp', '15', '°') }} / {{ basic.print('Pool_hum', '14', '%') }} <br />
+				</div>
+			</a>
+
+		</li>	
+		<li data-icon="false">
+			<a href="index.php?page=KG.Keller">
+				<img class="icon icon0" src="{{ icon0 }}measure_power_meter.svg"/><h3>Stromverbrauch</h3>
+				<div class="ui-li-aside">
+					{{ basic.print('Power_now', '2', 'kWh') }} / {{ basic.print('Power_total', '3', 'kWh') }} <br />
+				</div>
+			</a>
+
+		</li>		
+	</ul>
+	
 	<h3>Strom</h3>
-	{{ plot.period('bewegung', '2', 'max', '48h', 'now', 0, '', '10000', 'Stromverbrauch', Nan,Nan, ['Uhrzeit', 'kWh'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
+	{{ plot.period('bewegung', '2', 'raw', '48h', 'now', 0, '', '10000', 'Stromverbrauch', Nan,Nan, ['Uhrzeit', 'kWh'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 
 	<h3>AZ</h3>
-	{{ plot.period('p6', ['12','13'], 'raw', '48h','',Nan,'',10000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'],'advanced' ) }}
+	{{ plot.period('p1', ['12','13'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 	{{ plot.comfortchart('c1','13','12') }}
 	<h3>WG</h3>
-	{{ plot.period('p7', ['10','11'], 'raw', '48h','',Nan,'',10000,['Feuchte','Temperatur'],['#aa0', '#a00'], ['line', 'line'], ['', 'Hum %rF Temp °C'],'advanced' ) }}
+	{{ plot.period('p1', ['14','15'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 	
 	
 
