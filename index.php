@@ -30,8 +30,8 @@ if ($request['page'] == '')
 
 // Caching
 header('Cache-Control: must-revalidate');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Methods: GET, POST');
 require_once 'lib/pagecache.php';
 $cache = new Pagecache(const_path . 'temp/pagecache/' . config_cachefolder . '/' . $config_pages . '/' . $request['page'] . '.html', config_cache);
 
