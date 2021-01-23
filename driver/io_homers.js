@@ -204,32 +204,41 @@ var io = {
             var limit = pt[4];
 
             var starttime = new Date(Date.now() - tmin);
-            var url = io.url + "postgrest/rpc/getfitem?id=" + item + "&limit=" + limit; // + "?starttime=" + starttime.toISOString();
+            var url= '';
+			
+			var id=parseInt(item);
+			console.log(id + " "+ typeof id);
+			console.log(item + " "+ typeof item);
+			
+			if (isNaN(id))
+			{
+				var parts=item.split(":");
+				url= io.url + "postgrest/rpc/getfitembyname?descr=" + parts[0] + "&vtype=" + parts[1] + "&limit=" + limit;
+			}
+			else
+			{
+				
+				url= io.url + "postgrest/rpc/getfitem?id=" + item + "&limit=" + limit; 
+				
+			}
+			
             io.debug && console.debug(url);
-            /*
+            
             if (tmax != 'now') {
                 tmax = new Date().duration(pt[3]);
                 var endtime = new Date(new Date() - tmax);
                 url += "&endtime=" + endtime.toISOString();
-            }*/
+            }
 
+			console.debug(url);
             $.ajax({
                 url: url,
                 type: 'GET'
             }).done(function (persistence) {
-                //console.log(persistence);
+                console.log(persistence);
                 var plotData = new Array();
                 if (persistence.length > 0) {
                     $.each(persistence, function (key, data) {
-                        /*console.log(data);
-                        console.log(key);
-                        console.log(item);
-                        var val = io.convertState(item, data.state);
-                        if (isNaN(val)) {
-                            val = 0;
-                        } else if (Number(val) == val && val % 1 !== 0) { //isFloat
-                            val = parseFloat(val).toFixed(2);
-                        }*/
                         plotData.push([data.t, data.val]);
                     })
                     plotData.sort(function (a, b) {

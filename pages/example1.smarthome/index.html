@@ -31,17 +31,7 @@
 	<iframe marginheight='0' marginwidth='0' scrolling='no' width='300' height='365' name='FC3' style='border:1px solid;border-radius:20px;border-color:#00537f;' 
 	srcdoc="<img class=center src='https://www.wetteronline.de/?diagram=true&gid=x0492&pid=p_city_local&timestamp=&trendchart=true'/>" src='https://api.wetteronline.de/wetterwidget?gid=x0492&modeid=FC3&seourl=reichenbach-baden-wuerttemberg-73262&locationname=Reichenbach&lang=de' >
 	</iframe>	
-
-	<h1><img class=center src='https://www.wetteronline.de/?diagram=true&gid=x0492&pid=p_city_local&timestamp=&trendchart=true'/></h1>
 	<hr>
-	{{ weather.current('weather') }}
-	<hr>
-	{{ weather.forecastweek('weather_forecast') }}
-	
-	
-	
-
-
 {% endblock %}
 
 {% block content %}
@@ -89,7 +79,7 @@
 			<a href="index.php?page=KG.Keller">
 				<img class="icon icon0" src="{{ icon0 }}measure_power_meter.svg"/><h3>Stromverbrauch</h3>
 				<div class="ui-li-aside">
-					{{ basic.print('Power_now', '2', 'kWh') }} / {{ basic.print('Power_total', '3', 'kWh') }} <br />
+					{{ basic.print('Power_now', 'PowerMon.V_WATT', 'W') }} / {{ basic.print('Power_total', 'PowerMon.V_KWH', 'kWh') }} <br />
 				</div>
 			</a>
 
@@ -97,13 +87,13 @@
 	</ul>
 	
 	<h3>Strom</h3>
-	{{ plot.period('bewegung', '2', 'raw', '48h', 'now', 0, '', '10000', 'Stromverbrauch', Nan,Nan, ['Uhrzeit', 'kWh'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
+	{{ plot.period('bewegung', 'PowerMon:V_WATT', 'raw', '48h', 'now', 0, '', '10000', 'Stromverbrauch', Nan,Nan, ['Uhrzeit', 'kWh'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 
 	<h3>AZ</h3>
-	{{ plot.period('p1', ['12','13'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
+	{{ plot.period('p1', ['Clima_AZ_Humidity:V_HUM','Clima_AZ_Temp:V_TEMP'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 	{{ plot.comfortchart('c1','13','12') }}
 	<h3>WG</h3>
-	{{ plot.period('p1', ['14','15'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
+	{{ plot.period('p2', ['Clima_Pool_Humidity:V_HUM','Clima_Pool_Temp:V_TEMP'], 'max', '48h', 'now', Nan, '', '10000', ['Feuchte','Temperatur'], ['#aa0', '#a00'], ['line', 'line'], ['Uhrzeit', 'Hum %rF Temp °C'], 'advanced', '', '', '', '', '', { yAxis: [ { tickInterval: 40 } ], legend: {align: 'right', verticalAlign: 'top', y: 50, x: 15, layout: 'vertical'}, chart: { marginRight: 110} }) }}
 	
 	
 
